@@ -27,27 +27,27 @@ const controllers = {
         const users = await User.find();
         res.json ({ users });
     },
+    
+    vistaCasa: async (req, res) =>{
+        const casas = await House.find();
+        res.json ({casas});
+    },
+    
+    vistaUnicaCasa: async (req, res) =>{
+        const casas = await House.findById(req, params.id)
+        res.json ({casas});
+    },
+    
+    crearCasa: async (req, res) =>{
+        try {
+            const save = new House (req.body);
+            await save.save(),
+            res.status(201).json(save)
+        } catch (err) {
+            res.status(501).json({msg: "no se puede guardar la casa, por favor intenta mas tarde", err,});
+        }
+    }
 };
 
-const vistaCasa = async (req, res) =>{
-    const casas = await House.find()
-    res.json ({casas})
-}
-
-const vistaUnicaCasa = async (req, res) =>{
-    const casas = await House.findById(req, params.id)
-    res.json ({casas})
-}
-
-const crearCasa = async (req, res) =>{
-    try {
-        const save = new House (req.body);
-        await save.save(),
-        res.status(201).json(save)
-    } catch (err) {
-        res.status(501).json({msg: "no se puede guardar la casa, por favor intenta mas tarde", err})
-    }
-}
-
 module.exports = controllers;
-module.exports = {vistaCasa, vistaUnicaCasa, crearCasa}
+//module.exports = {vistaCasa, vistaUnicaCasa, crearCasa}
