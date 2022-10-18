@@ -28,6 +28,10 @@ const storeSchema = new Schema({
         type: Number,
         required: true,
     },
+    active: {
+        type: Boolean,
+        required: true,
+    }
 });
 const House = mongoose.model('House', storeSchema);
 
